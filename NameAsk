@@ -1,0 +1,164 @@
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+
+public class NameAsk extends Buttons implements ActionListener{
+
+	static final long serialVersionUID = 1L;
+	
+	static String n1,n2,Time;
+	static JTextField name1,name2, time;
+	
+	
+	
+	public static void main(String[] args) {
+		new NameAsk().setVisible(true);
+		
+	}
+	public NameAsk() {
+		super();
+		setSize(1200, 1200);
+		setResizable(true);
+		
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		
+		
+		Font f1=new Font("SansSerif", Font.BOLD, 40);
+		Font f2=new Font("SansSerif", Font.ITALIC, 110);
+		Font f3=new Font("SansSerif", Font.PLAIN, 30);
+		
+		ImageIcon ic =new ImageIcon("C:\\Users\\Jonathan\\pictures\\java\\Background.png");
+		JLabel Background= new JLabel(ic);
+		setContentPane(Background);
+		setLayout(new GridBagLayout());
+		GridBagConstraints gbc=new GridBagConstraints();
+		
+		JLabel gameName=new JLabel("Connect Four");
+		gameName.setFont(f2);
+		gbc.gridx=0;
+		gbc.gridy=0;
+		add(gameName,gbc);
+		
+		gbc.weighty =0.2;
+		JLabel l1=new JLabel("Enter Player 1's name:");
+		
+		l1.setFont(f1);
+		l1.setForeground(Color.GREEN);
+		gbc.gridx=0;
+		gbc.gridy=1;
+		add(l1,gbc);
+		
+		name1=new JTextField("Player 1", 10);
+		name1.setFont(f1);
+		
+		gbc.gridx=1;
+		gbc.gridy=1;
+		add(name1,gbc);
+		
+		
+		JLabel l2=new JLabel("Enter Player 1's name:");
+		l2.setFont(f1);
+		l2.setForeground(Color.GREEN);
+		gbc.gridx=0;
+		gbc.gridy=2;
+		add(l2,gbc);
+				
+		name2=new JTextField("Player 2",10);
+		name2.setFont(f1);
+		gbc.gridx=1;
+		gbc.gridy=2;
+		add(name2,gbc);
+		
+		
+		JLabel l3=new JLabel("Enter only if you want a time limit:");//Doesn't work currently
+		l2.setFont(f1);
+		l3.setForeground(Color.GREEN);
+		gbc.gridx=0;
+		gbc.gridy=3;
+		l3.setFont(f1);
+		add(l3,gbc);
+				
+		time=new JTextField("0",10);
+		gbc.gridx=1;
+		gbc.gridy=3;
+		time.setFont(f1);
+		add(time,gbc);
+		gbc.weighty =1;
+		
+		
+		gbc.anchor = GridBagConstraints.CENTER;
+		gbc.anchor = GridBagConstraints.PAGE_END;
+		JButton start=new JButton("Start Game");
+		
+		gbc.gridx=0;
+		gbc.gridy=4;
+		add(start,gbc);
+		gbc.weighty =0;
+		start.setFont(f3);
+		
+		JButton exit=new JButton("Exit");
+		gbc.gridx=1;
+		gbc.gridy=4;
+		exit.setFont(f3);
+		add(exit,gbc);
+		
+        start.addActionListener(actions);
+        exit.addActionListener(actions);
+        
+        
+        
+        
+        
+        
+	}
+	public static String getName1() {
+		return n1;
+	}
+	public static String getName2() {
+		return n2;
+	}
+	public static int getTime() {
+		
+		return Integer.parseInt(time.getText());
+	}
+	public void setName1() {
+		n1=name1.getText();
+	}
+	public void setName2() {
+		n2=name2.getText();
+	}
+	public void setTime() {
+		Time=time.getText();
+	}
+	private ActionListener actions = new ActionListener() {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			String name = e.getActionCommand();
+			if(name.equals("Start Game")) {
+				setName1();
+				setName2();
+				setTime();
+				new ConnectFour().setVisible(true);
+				dispose();
+			}
+			else if(name.equals("Exit")){
+				dispose();
+			}
+			
+			
+			
+		}
+	};
+	
+}
